@@ -1,4 +1,5 @@
 ﻿using QLSV.BLL;
+using QLSV.DTO;
 using QLSV.GUI.SinhVien;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace QLSV
     public partial class fQLSV : Form
     {
         private bool thoat = true;
-        private string maSV = string.Empty;
+        private SinhVienDTO sv = new SinhVienDTO();
 
         public bool Thoat { get => thoat; private set => thoat = value; }
 
@@ -96,8 +97,9 @@ namespace QLSV
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            maSV = dataGridView1.CurrentRow?.Cells[0].Value?.ToString() ?? "";
-
+            if (e.RowIndex < 0) return;
+            sv = (dataGridView1.Rows[e.RowIndex].DataBoundItem as SinhVienDTO)!;
+            if (sv == null) return;
             btnChiTiet.Enabled = true;
             btnSua.Enabled = true;
             btnXoa.Enabled = true;
@@ -105,7 +107,7 @@ namespace QLSV
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            fSua f = new fSua(maSV);
+            fSua f = new fSua(sv);
             btnChiTiet.Enabled = false;
             btnSua.Enabled = false;
             btnThem.Enabled = false;
@@ -119,7 +121,7 @@ namespace QLSV
             if (res == DialogResult.No) return;
             try
             {
-                if (BLL_SinhVien.Instance.Xoa(maSV))
+                if (BLL_SinhVien.Instance.Xoa(sv))
                 {
                     MessageBox.Show("Xoá thành công");
                     btnChiTiet.Enabled = false;
@@ -136,8 +138,8 @@ namespace QLSV
 
         private void txbMaSV_TextChanged(object sender, EventArgs e)
         {
-
-            DataTable data = BLL_SinhVien.Instance.TimKiem(txbMaSV.Text, txbHoTen.Text);
+            
+            List<SinhVienDTO> listSV = BLL_SinhVien.Instance.TimKiem(txbMaSV.Text, txbHoTen.Text);
             dataGridView1.DataSource = data;
         }
 
@@ -149,7 +151,7 @@ namespace QLSV
 
         private void btnChiTiet_Click(object sender, EventArgs e)
         {
-            fThongTinChiTiet f = new fThongTinChiTiet(maSV);
+            fThongTinChiTiet f = new fThongTinChiTiet(sv);
             f.ShowDialog();
         }
     }

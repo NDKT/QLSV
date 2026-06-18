@@ -1,4 +1,5 @@
 ﻿using QLSV.DAL;
+using QLSV.DTO;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -21,12 +22,12 @@ namespace QLSV.BLL
         }
         private BLL_SinhVien() { }
 
-        public bool Them(string maSV, string tenSv, string maLop, string que, string gioiTinh, DateTime ngaySinh, DateTime ngayNhapHoc)
+        public bool Them(SinhVienDTO sv)
         {
-            if (ngayNhapHoc <= ngaySinh) throw new Exception("Ngày nhập học không được trước ngày sinh");
+            if (sv.NgayNhapHoc <= sv.NgaySinh) throw new Exception("Ngày nhập học không được trước ngày sinh");
             try
             {
-                return DAL_SinhVien.Instance.Them(maSV, tenSv, maLop, que, gioiTinh, ngaySinh, ngayNhapHoc);
+                return DAL_SinhVien.Instance.Them(sv);
             }
             catch (Exception ex)
             {
@@ -34,11 +35,11 @@ namespace QLSV.BLL
             }
         }
 
-        public bool Xoa(string maSV)
+        public bool Xoa(SinhVienDTO sv)
         {
             try
             {
-                return DAL_SinhVien.Instance.Xoa(maSV);
+                return DAL_SinhVien.Instance.Xoa(sv);
             }
             catch (Exception ex)
             {
@@ -46,23 +47,23 @@ namespace QLSV.BLL
             }
         }
 
-        public DataTable DanhSach()
+        public List<SinhVienDTO> DanhSach()
         {
             return DAL_SinhVien.Instance.DanhSach();
         }
 
-        public DataTable TimKiem(string maSV, string tenSV)
+        public List<SinhVienDTO> TimKiem(SinhVienDTO sv)
         {
-            return DAL_SinhVien.Instance.TimKiem(maSV, tenSV);
+            return DAL_SinhVien.Instance.TimKiem(sv);
         }
 
-        public bool Sua(string maSV, string tenSv, string maLop, string que, string gioiTinh, DateTime ngaySinh, DateTime ngayNhapHoc)
+        public bool Sua(SinhVienDTO sv)
         {
-            if (string.IsNullOrWhiteSpace(tenSv)) throw new Exception("Vui lòng nhập tên");
-            if (string.IsNullOrEmpty(que)) throw new Exception("Vui lòng nhập quê");
+            if (string.IsNullOrWhiteSpace(sv.TenSV)) throw new Exception("Vui lòng nhập tên");
+            if (string.IsNullOrEmpty(sv.QueQuan)) throw new Exception("Vui lòng nhập quê");
             try
             {
-               return DAL_SinhVien.Instance.Sua(maSV, tenSv, maLop, que, gioiTinh, ngaySinh, ngayNhapHoc);
+               return DAL_SinhVien.Instance.Sua(sv);
             }
             catch(Exception ex)
             {

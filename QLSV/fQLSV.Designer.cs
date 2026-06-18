@@ -79,24 +79,26 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1275, 211);
+            panel1.Size = new Size(1275, 214);
             panel1.TabIndex = 2;
             // 
             // panel5
             // 
+            panel5.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             panel5.BorderStyle = BorderStyle.FixedSingle;
             panel5.Controls.Add(label2);
             panel5.Controls.Add(panel4);
             panel5.Controls.Add(panel3);
             panel5.Location = new Point(12, 35);
             panel5.Name = "panel5";
-            panel5.Size = new Size(885, 122);
+            panel5.Size = new Size(1251, 122);
             panel5.TabIndex = 8;
             // 
             // label2
             // 
+            label2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             label2.AutoSize = true;
-            label2.Location = new Point(409, 15);
+            label2.Location = new Point(602, 11);
             label2.Name = "label2";
             label2.Size = new Size(85, 22);
             label2.TabIndex = 3;
@@ -104,9 +106,10 @@
             // 
             // panel4
             // 
+            panel4.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             panel4.Controls.Add(txbHoTen);
             panel4.Controls.Add(lb2);
-            panel4.Location = new Point(465, 70);
+            panel4.Location = new Point(837, 80);
             panel4.Name = "panel4";
             panel4.Size = new Size(409, 37);
             panel4.TabIndex = 2;
@@ -158,11 +161,12 @@
             // 
             // panel10
             // 
+            panel10.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             panel10.Controls.Add(btnChiTiet);
             panel10.Controls.Add(btnSua);
             panel10.Controls.Add(btnXoa);
             panel10.Controls.Add(btnThem);
-            panel10.Location = new Point(477, 171);
+            panel10.Location = new Point(866, 174);
             panel10.Name = "panel10";
             panel10.Size = new Size(409, 37);
             panel10.TabIndex = 7;
@@ -280,9 +284,9 @@
             // 
             panel2.Controls.Add(dataGridView1);
             panel2.Dock = DockStyle.Fill;
-            panel2.Location = new Point(0, 211);
+            panel2.Location = new Point(0, 214);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1275, 355);
+            panel2.Size = new Size(1275, 352);
             panel2.TabIndex = 3;
             // 
             // dataGridView1
@@ -302,7 +306,7 @@
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.Size = new Size(1275, 355);
+            dataGridView1.Size = new Size(1275, 352);
             dataGridView1.TabIndex = 1;
             dataGridView1.CellClick += dataGridView1_CellContentClick;
             // 

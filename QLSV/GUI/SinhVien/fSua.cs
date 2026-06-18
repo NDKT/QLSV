@@ -7,18 +7,19 @@ using System.Drawing;
 using System.Globalization;
 using System.Text;
 using System.Windows.Forms;
+using QLSV;
 
 namespace QLSV.GUI.SinhVien
 {
     public partial class fSua : Form
     {
-        private string maSV = string.Empty;
         private BindingSource data = new BindingSource();
-        public fSua(string maSV)
+        private DTO.SinhVienDTO sv;
+        public fSua(DTO.SinhVienDTO sv)
         {
             InitializeComponent();
-            this.maSV = maSV;
             Init();
+            this.sv = sv;
         }
 
         private void Init()
@@ -29,15 +30,15 @@ namespace QLSV.GUI.SinhVien
             cbTenLop.DisplayMember = "TenLop";
             cbTenLop.DataSource = data;
 
-            DataTable dtSV = BLL_SinhVien.Instance.TimKiem(maSV, "");
-            txbMaSV.Text = dtSV.Rows[0].Field<string>("MaSV");
-            txbHoTen.Text = dtSV.Rows[0].Field<string>("TenSV");
-            txbQueQuan.Text = dtSV.Rows[0].Field<string>("QueQuan");
-            dtpkNgaySinh.Value = dtSV.Rows[0].Field<DateTime>("NgaySinh");
-            dtpkNgayNhapHoc.Value = dtSV.Rows[0].Field<DateTime>("NgayNhapHoc");
-            if (dtSV.Rows[0]["GioiTinh"].ToString() == "Nam") radioButton1.Checked = true;
+            List<DTO.SinhVienDTO> listSV = BLL_SinhVien.Instance.TimKiem(sv);
+            txbMaSV.Text = listSV[0].MaSV;
+            txbHoTen.Text = listSV[0].TenSV;
+            txbQueQuan.Text =listSV[0].QueQuan;
+            dtpkNgaySinh.Value = listSV[0].NgaySinh;
+            dtpkNgayNhapHoc.Value = listSV[0].NgayNhapHoc;
+            if (listSV[0].GioiTinh == "Nam") radioButton1.Checked = true;
             else radioButton2.Checked = true;
-            cbMaLop.SelectedItem = dtSV.Rows[0].Field<string>("MaLop")!;
+            cbMaLop.SelectedItem = listSV[0].MaLop;
         }
 
         private void btnQuayLai_Click(object sender, EventArgs e)
@@ -62,7 +63,7 @@ namespace QLSV.GUI.SinhVien
             DateTime ngayNhapHoc = dtpkNgayNhapHoc.Value;
             try
             {
-                if(BLL_SinhVien.Instance.Sua(maSV, hoTen, maLop, que, gioiTinh, ngaySinh, ngayNhapHoc))
+                if(BLL_SinhVien.Instance.Sua(sv))
                 {
                     MessageBox.Show("Sửa thành công", "Thông báo");
                     this.Close();
