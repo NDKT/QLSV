@@ -28,10 +28,10 @@ namespace QLSV.DAL
             return DAL.Instance.excuteNonQuery(query, sv.MaSV, sv.TenSV, sv.MaLop, sv.QueQuan, sv.GioiTinh, sv.NgaySinh, sv.NgayNhapHoc);
         }
 
-        public bool Xoa(SinhVienDTO sv)
+        public bool Xoa(string maSV)
         {
             string query = "delete from SinhVien where MaSV = @ma";
-            return DAL.Instance.excuteNonQuery(query, sv.MaSV);
+            return DAL.Instance.excuteNonQuery(query, maSV);
         }
 
         private List<SinhVienDTO> ConvertToList(DataTable dt)
@@ -60,12 +60,12 @@ namespace QLSV.DAL
             return ConvertToList(dt);
         }
 
-        public List<SinhVienDTO> TimKiem(SinhVienDTO sv)
+        public List<SinhVienDTO> TimKiem(string maSV, string tenSV)
         {
-            if (string.IsNullOrWhiteSpace(sv.MaSV) && string.IsNullOrWhiteSpace(sv.TenSV)) return DanhSach();
+            if (string.IsNullOrWhiteSpace(maSV) && string.IsNullOrWhiteSpace(tenSV)) return DanhSach();
             string query = "Select * from SinhVien Where MaSV = @ma OR TenSV like '%' + @ten +'%'";
-            if (string.IsNullOrWhiteSpace(sv.TenSV)) query = "Select * from SinhVien Where MaSV = @ma";
-            DataTable dt = DAL.Instance.excuteQuery(query, sv.MaSV, sv.TenSV);
+            if (string.IsNullOrWhiteSpace(tenSV)) query = "Select * from SinhVien Where MaSV = @ma";
+            DataTable dt = DAL.Instance.excuteQuery(query, maSV, tenSV);
             return ConvertToList(dt);
         }
 

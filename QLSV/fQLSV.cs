@@ -1,4 +1,5 @@
 ﻿using QLSV.BLL;
+using QLSV.DAL.Interfaces;
 using QLSV.DTO;
 using QLSV.GUI.SinhVien;
 using System;
@@ -98,8 +99,8 @@ namespace QLSV
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
-            sv = (dataGridView1.Rows[e.RowIndex].DataBoundItem as SinhVienDTO)!;
-            if (sv == null) return;
+            this.sv = (dataGridView1.Rows[e.RowIndex].DataBoundItem as SinhVienDTO)!;
+            if (this.sv == null) return;
             btnChiTiet.Enabled = true;
             btnSua.Enabled = true;
             btnXoa.Enabled = true;
@@ -110,7 +111,7 @@ namespace QLSV
             fSua f = new fSua(sv);
             btnChiTiet.Enabled = false;
             btnSua.Enabled = false;
-            btnThem.Enabled = false;
+            btnXoa.Enabled = false;
             f.ShowDialog();
             LoadSV();
         }
@@ -121,12 +122,12 @@ namespace QLSV
             if (res == DialogResult.No) return;
             try
             {
-                if (BLL_SinhVien.Instance.Xoa(sv))
+                if (BLL_SinhVien.Instance.Xoa(sv.MaSV))
                 {
                     MessageBox.Show("Xoá thành công");
                     btnChiTiet.Enabled = false;
                     btnSua.Enabled = false;
-                    btnThem.Enabled = false;
+                    btnXoa.Enabled = false;
                     LoadSV();
                 }
             }
@@ -140,7 +141,7 @@ namespace QLSV
         {
             
             List<SinhVienDTO> listSV = BLL_SinhVien.Instance.TimKiem(txbMaSV.Text, txbHoTen.Text);
-            dataGridView1.DataSource = data;
+            dataGridView1.DataSource = listSV;
         }
 
         private void fQLSV_VisibleChanged(object sender, EventArgs e)

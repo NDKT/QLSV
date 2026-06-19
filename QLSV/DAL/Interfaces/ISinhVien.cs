@@ -8,8 +8,8 @@ namespace QLSV.DAL.Interfaces
     public interface ISinhVien
     {
         public bool Them(SinhVienDTO sv);
-        public bool Xoa(SinhVienDTO sv);
-        public List<SinhVienDTO> TimKiem(SinhVienDTO sv);
+        public bool Xoa(string maSV);
+        public List<SinhVienDTO> TimKiem(string maSV, string tenSV);
         public bool Sua(SinhVienDTO sv);
         public List<SinhVienDTO> DanhSach();
     }

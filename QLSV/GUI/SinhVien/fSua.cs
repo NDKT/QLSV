@@ -17,9 +17,10 @@ namespace QLSV.GUI.SinhVien
         private DTO.SinhVienDTO sv;
         public fSua(DTO.SinhVienDTO sv)
         {
+            this.sv = sv;
+
             InitializeComponent();
             Init();
-            this.sv = sv;
         }
 
         private void Init()
@@ -30,15 +31,14 @@ namespace QLSV.GUI.SinhVien
             cbTenLop.DisplayMember = "TenLop";
             cbTenLop.DataSource = data;
 
-            List<DTO.SinhVienDTO> listSV = BLL_SinhVien.Instance.TimKiem(sv);
-            txbMaSV.Text = listSV[0].MaSV;
-            txbHoTen.Text = listSV[0].TenSV;
-            txbQueQuan.Text =listSV[0].QueQuan;
-            dtpkNgaySinh.Value = listSV[0].NgaySinh;
-            dtpkNgayNhapHoc.Value = listSV[0].NgayNhapHoc;
-            if (listSV[0].GioiTinh == "Nam") radioButton1.Checked = true;
+            txbMaSV.Text = sv.MaSV;
+            txbHoTen.Text = sv.TenSV;
+            txbQueQuan.Text =sv.QueQuan;
+            dtpkNgaySinh.Value = sv.NgaySinh;
+            dtpkNgayNhapHoc.Value = sv.NgayNhapHoc;
+            if (sv.GioiTinh == "Nam") radioButton1.Checked = true;
             else radioButton2.Checked = true;
-            cbMaLop.SelectedItem = listSV[0].MaLop;
+            cbMaLop.SelectedItem = sv.MaLop;
         }
 
         private void btnQuayLai_Click(object sender, EventArgs e)
@@ -53,14 +53,12 @@ namespace QLSV.GUI.SinhVien
                 MessageBox.Show("Vui lòng chọn lớp", "Thông báo");
                 return;
             }
-            string maSV = txbMaSV.Text;
-            string hoTen = txbHoTen.Text;
-            string maLop = cbMaLop.Text;
-            string tenLop = cbTenLop.Text;
-            string gioiTinh = radioButton1.Checked == true ? "Nam" : "Nữ";
-            string que = txbQueQuan.Text;
-            DateTime ngaySinh = dtpkNgaySinh.Value;
-            DateTime ngayNhapHoc = dtpkNgayNhapHoc.Value;
+            sv.TenSV = txbHoTen.Text;
+            sv.MaLop = cbMaLop.Text;
+            sv.GioiTinh = radioButton1.Checked == true ? "Nam" : "Nữ";
+            sv.QueQuan = txbQueQuan.Text;
+            sv.NgaySinh = dtpkNgaySinh.Value;
+            sv.NgayNhapHoc = dtpkNgayNhapHoc.Value;
             try
             {
                 if(BLL_SinhVien.Instance.Sua(sv))

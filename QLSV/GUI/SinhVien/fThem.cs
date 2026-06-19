@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using QLSV.GUI;
 using QLSV.BLL;
+using QLSV.DTO;
 
 namespace QLSV.GUI.SinhVien
 {
@@ -56,16 +57,19 @@ namespace QLSV.GUI.SinhVien
                 MessageBox.Show("Vui lòng chọn lớp", "Thông báo");
                 return;
             }
-            ngaySinh = dtpkNgaySinh.Value;
-            ngayNhapHoc = dtpkNgayNhapHoc.Value;
-            maSV = txbMaSV.Text;
-            hoTen = txbHoTen.Text;
-            maLop = cbMaLop.Text;
-            que = txbQueQuan.Text;
-            gioiTinh = radioButton1.Checked ? "Nam" : "Nữ";
+            SinhVienDTO svMoi = new SinhVienDTO()
+            {
+                NgaySinh = dtpkNgaySinh.Value,
+                NgayNhapHoc = dtpkNgayNhapHoc.Value,
+                MaSV = txbMaSV.Text,
+                TenSV = txbHoTen.Text,
+                MaLop = cbMaLop.Text,
+                QueQuan = txbQueQuan.Text,
+                GioiTinh = radioButton1.Checked ? "Nam" : "Nữ"
+            };
             try
             {
-                if(BLL_SinhVien.Instance.Them(maSV, hoTen, maLop, que, gioiTinh, ngaySinh, ngayNhapHoc))
+                if(BLL_SinhVien.Instance.Them(svMoi))
                 {
                     MessageBox.Show("Thêm sinh viên thành công!", "Thông báo");
                     this.Close();

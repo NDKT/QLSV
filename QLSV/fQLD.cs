@@ -1,4 +1,5 @@
 ﻿using QLSV.BLL;
+using QLSV.DTO;
 using QLSV.GUI.Diem;
 using System;
 using System.Collections.Generic;
@@ -50,12 +51,11 @@ namespace QLSV
             cbbTenMH.DisplayMember = "TenMH";
             cbbTenMH.DataSource = dataMH;
 
-            DataTable dtSV = BLL_SinhVien.Instance.DanhSach();
-            DataRow drSV = dtSV.NewRow();
-            drSV["MaSV"] = "";
-            drSV["TenSV"] = "";
-            dtSV.Rows.InsertAt(drSV, 0);
-            dataSV.DataSource = dtSV;
+            List<SinhVienDTO> listSV = BLL_SinhVien.Instance.DanhSach();
+            SinhVienDTO svF = new SinhVienDTO() { MaSV = "", TenSV = "" };
+            listSV.Insert(0, svF);
+            dataSV.DataSource = listSV;
+
 
 
             cbbTenSV.DisplayMember = "TenSV";

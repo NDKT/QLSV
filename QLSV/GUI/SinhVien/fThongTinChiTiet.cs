@@ -20,7 +20,7 @@ namespace QLSV.GUI.SinhVien
 
         private void LoadSV(SinhVienDTO sv)
         {
-            List<SinhVienDTO> listSV = BLL_SinhVien.Instance.TimKiem(sv);
+            List<SinhVienDTO> listSV = BLL_SinhVien.Instance.TimKiem(sv.MaSV, sv.TenSV);
             SinhVienDTO SV = listSV[0];
             string maLop = SV.MaLop;
             DataTable dataLop = BLL_Lop.Instance.TimKiem(maLop,"");

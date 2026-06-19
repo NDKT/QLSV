@@ -1,4 +1,5 @@
 ﻿using QLSV.DAL;
+using QLSV.DAL.Interfaces;
 using QLSV.DTO;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace QLSV.BLL
     public class BLL_SinhVien
     {
         private static BLL_SinhVien? instance = null;
-
+        private ISinhVien _svDAL = DAL_SinhVien.Instance;
         public static BLL_SinhVien Instance
         {
             get
@@ -27,7 +28,7 @@ namespace QLSV.BLL
             if (sv.NgayNhapHoc <= sv.NgaySinh) throw new Exception("Ngày nhập học không được trước ngày sinh");
             try
             {
-                return DAL_SinhVien.Instance.Them(sv);
+                return _svDAL.Them(sv);
             }
             catch (Exception ex)
             {
@@ -35,11 +36,11 @@ namespace QLSV.BLL
             }
         }
 
-        public bool Xoa(SinhVienDTO sv)
+        public bool Xoa(string maSV)
         {
             try
             {
-                return DAL_SinhVien.Instance.Xoa(sv);
+                return _svDAL.Xoa(maSV);
             }
             catch (Exception ex)
             {
@@ -49,12 +50,12 @@ namespace QLSV.BLL
 
         public List<SinhVienDTO> DanhSach()
         {
-            return DAL_SinhVien.Instance.DanhSach();
+            return _svDAL.DanhSach();
         }
 
-        public List<SinhVienDTO> TimKiem(SinhVienDTO sv)
+        public List<SinhVienDTO> TimKiem(string maSV, string tenSV)
         {
-            return DAL_SinhVien.Instance.TimKiem(sv);
+            return _svDAL.TimKiem(maSV,tenSV);
         }
 
         public bool Sua(SinhVienDTO sv)
@@ -63,7 +64,7 @@ namespace QLSV.BLL
             if (string.IsNullOrEmpty(sv.QueQuan)) throw new Exception("Vui lòng nhập quê");
             try
             {
-               return DAL_SinhVien.Instance.Sua(sv);
+               return _svDAL.Sua(sv);
             }
             catch(Exception ex)
             {
