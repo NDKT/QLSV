@@ -1,4 +1,5 @@
 ﻿using QLSV.BLL;
+using QLSV.DTO;
 using QLSV.Helper;
 using System;
 using System.Collections.Generic;
@@ -21,10 +22,17 @@ namespace QLSV.GUI.MonHoc
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            string kieuThi = cbKieuThi.SelectedItem?.ToString() ?? "";
+            MonHocDTO mon = new MonHocDTO()
+            {
+                KieuThi = cbKieuThi.SelectedItem?.ToString()!,
+                MaMH = txbMaMH.Text,
+                TenMH = txbTenMH.Text,
+                TC = (int)nmTin.Value,
+                Tiet = (int)nmSoTiet.Value
+            };
             try
             {
-                if (BLL_MonHoc.Instance.Them(txbMaMH.Text, txbTenMH.Text,kieuThi  ,nmTin.Value.ToString(), nmSoTiet.Value.ToString()))
+                if (BLL_MonHoc.Instance.Them(mon))
                 {
                     MessageBox.Show("Thêm môn học thành công", "Thông báo");
                     this.Close();

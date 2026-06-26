@@ -10,12 +10,12 @@ namespace QLSV.DTO
         private string tenMH = string.Empty;
         private int tC;
         private string kieuThi = string.Empty;
-        private int soTiet;
+        private int tiet;
 
         public string MaMH { get => maMH; set => maMH = value; }
         public string TenMH { get => tenMH; set => tenMH = value; }
         public int TC { get => tC; set => tC = value; }
         public string KieuThi { get => kieuThi; set => kieuThi = value; }
-        public int SoTiet { get => soTiet; set => soTiet = value; }
+        public int Tiet { get => tiet; set => tiet = value; }
     }
 }

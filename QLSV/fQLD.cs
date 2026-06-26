@@ -36,12 +36,12 @@ namespace QLSV
 
         private void LoadTimKiem()
         {
-            DataTable dtMH = BLL_MonHoc.Instance.DanhSach();
-            DataRow drMH = dtMH.NewRow();
-            drMH["TenMH"] = "";
-            drMH["MaMH"] = "";
-            dtMH.Rows.InsertAt(drMH, 0);
-            dataMH.DataSource = dtMH;
+            
+
+            List<MonHocDTO> listM = BLL_MonHoc.Instance.DanhSach();
+            MonHocDTO nMon = new MonHocDTO() { TenMH = "", MaMH = "" };
+            listM.Insert(0, nMon);
+            dataMH.DataSource = listM;
 
             cbbMaMH.DisplayMember = "MaMH";
             cbbMaMH.DataSource = dataMH;

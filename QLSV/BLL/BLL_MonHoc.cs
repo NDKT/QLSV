@@ -1,4 +1,6 @@
 ﻿using QLSV.DAL;
+using QLSV.DAL.Interfaces;
+using QLSV.DTO;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,7 +11,7 @@ namespace QLSV.BLL
     public class BLL_MonHoc
     {
         private static BLL_MonHoc? instance = null;
-
+        private IMonHoc monDAL = DAL_MonHoc.Instance;
         public static BLL_MonHoc Instance
         {
             get
@@ -22,18 +24,15 @@ namespace QLSV.BLL
 
         private BLL_MonHoc() { }
 
-        public bool Them(string maMH, string tenMH, string kieuThi, string soTin, string soTiet)
+        public bool Them(MonHocDTO mon)
         {
-            int tin = Int32.Parse(soTin);
-            int tiet = Int32.Parse(soTiet);
-            if(string.IsNullOrWhiteSpace(maMH) || string.IsNullOrWhiteSpace(tenMH) || string.IsNullOrWhiteSpace(kieuThi))
+            if(string.IsNullOrWhiteSpace(mon.MaMH) || string.IsNullOrWhiteSpace(mon.TenMH) || string.IsNullOrWhiteSpace(mon.KieuThi))
             {
                 throw new Exception("Vui lòng nhập dữ liêu");
             }
-            maMH.Trim(); tenMH.Trim(); kieuThi.Trim();
             try
             {
-                return DAL_MonHoc.Instance.Them(maMH, tenMH, kieuThi, tin, tiet);
+                return monDAL.Them(mon);
             }
             catch(Exception ex)
             {
@@ -41,14 +40,14 @@ namespace QLSV.BLL
             }
         }
 
-        public bool Sua(string maMH,string tenMH, string kieuThi, string soTin, string soTiet)
+        public bool Sua(MonHocDTO mon)
         {
-            if (!Int32.TryParse(soTin, out int tin)) throw new Exception("Vui lòng nhập số tín");
-            if (!Int32.TryParse(soTiet, out int tiet)) throw new Exception("Vui lòng nhập số tín");
-            if (string.IsNullOrEmpty(tenMH)) throw new Exception("Tên môn học không được trống");
+            if (mon.Tiet <= 0) throw new Exception("Vui lòng nhập số tín");
+            if (mon.TC <= 0) throw new Exception("Vui lòng nhập số tín");
+            if (string.IsNullOrEmpty(mon.TenMH)) throw new Exception("Tên môn học không được trống");
             try
             {
-                return DAL_MonHoc.Instance.Sua(maMH,tenMH, kieuThi, tin, tiet);
+                return monDAL.Sua(mon);
             }
             catch(Exception ex)
             {
@@ -56,7 +55,7 @@ namespace QLSV.BLL
             }
         }
 
-        public DataTable TimKiem(string maMH, string tenMH)
+        public List<MonHocDTO> TimKiem(string maMH, string tenMH)
         {
             if (string.IsNullOrEmpty(maMH) && string.IsNullOrWhiteSpace(tenMH))
             {
@@ -64,22 +63,22 @@ namespace QLSV.BLL
             }
             try
             {
-                return DAL_MonHoc.Instance.TimKiem(maMH.Trim(), tenMH.Trim());
+                return monDAL.TimKiem(maMH.Trim(), tenMH.Trim());
             }catch(Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
-        public DataTable DanhSach()
+        public List<MonHocDTO> DanhSach()
         {
-            return DAL_MonHoc.Instance.DanhSach();
+            return monDAL.DanhSach();
         }
 
         public bool Xoa(string maMH)
         {
             try
             {
-                return DAL_MonHoc.Instance.Xoa(maMH);
+                return monDAL.Xoa(maMH);
             }
             catch (Exception ex)
             {

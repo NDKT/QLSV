@@ -1,4 +1,5 @@
 ﻿using QLSV.BLL;
+using QLSV.DTO;
 using QLSV.GUI.MonHoc;
 using QLSV.Helper;
 using System;
@@ -13,6 +14,7 @@ namespace QLSV
 {
     public partial class fQLMH : Form
     {
+        private MonHocDTO mon = new MonHocDTO();
         public fQLMH()
         {
             InitializeComponent();
@@ -21,7 +23,9 @@ namespace QLSV
 
         private void LoadData()
         {
-            FormHelper.ThemDuLieu(BLL_MonHoc.Instance.DanhSach(), dataGridView1);
+            //FormHelper.ThemDuLieu(BLL_MonHoc.Instance.DanhSach(), dataGridView1);
+            List<MonHocDTO> listM = BLL_MonHoc.Instance.DanhSach();
+            dataGridView1.DataSource = listM;
         }
 
         private void btnThem_Click(object sender, EventArgs e)
@@ -33,12 +37,7 @@ namespace QLSV
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            string maMH = dataGridView1.CurrentRow?.Cells[0].Value?.ToString() ?? "";
-            string tenMH = dataGridView1.CurrentRow?.Cells[1].Value?.ToString() ?? "";
-            decimal soTin = Decimal.Parse(dataGridView1.CurrentRow?.Cells[2].Value?.ToString() ?? "0");
-            decimal soTiet = Decimal.Parse(dataGridView1.CurrentRow?.Cells[4].Value?.ToString() ?? "0");
-            string kieuThi = dataGridView1.CurrentRow?.Cells[3].Value?.ToString() ?? "";
-            fSuaMH f = new fSuaMH(maMH, tenMH, soTin, soTiet, kieuThi);
+            fSuaMH f = new fSuaMH(mon);
             ToolHelper.DisableBtn(btnXoa, btnSua);
             f.ShowDialog();
             LoadData();
@@ -46,6 +45,8 @@ namespace QLSV
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0) return;
+            mon = (dataGridView1.Rows[e.RowIndex].DataBoundItem as MonHocDTO)!;
             btnSua.Enabled = true;
             btnXoa.Enabled = true;
         }
