@@ -12,7 +12,7 @@ using QLSV.DTO;
 
 namespace QLSV.GUI.SinhVien
 {
-    public partial class fThem : Form
+    public partial class fThemSV : Form
     {
         private DateTime ngaySinh;
         private DateTime ngayNhapHoc;
@@ -22,7 +22,7 @@ namespace QLSV.GUI.SinhVien
         private string que = string.Empty;
         private string gioiTinh = string.Empty;
         private BindingSource data = new BindingSource();
-        public fThem()
+        public fThemSV()
         {
             InitializeComponent();
             LoadCb();
@@ -45,7 +45,7 @@ namespace QLSV.GUI.SinhVien
 
         private void btnThemLop_Click(object sender, EventArgs e)
         {
-            Lop.fThem f = new Lop.fThem();
+            Lop.fThemLop f = new Lop.fThemLop();
             f.ShowDialog();
             LoadCb();
         }

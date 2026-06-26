@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace QLSV.GUI.MonHoc
 {
-    public partial class fSua : Form
+    public partial class fSuaMH : Form
     {
-        public fSua(string maMH, string tenMH, decimal soTin, decimal soTiet, string kieuThi)
+        public fSuaMH(string maMH, string tenMH, decimal soTin, decimal soTiet, string kieuThi)
         {
             InitializeComponent();
             btnSua.Enabled = true;

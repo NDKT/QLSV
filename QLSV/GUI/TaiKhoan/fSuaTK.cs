@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace QLSV.GUI.TaiKhoan
 {
-    public partial class fSua : Form
+    public partial class fSuaTK : Form
     {
-        public fSua(string id, string ten)
+        public fSuaTK(string id, string ten)
         {
             InitializeComponent();
             txbID.Text = id;

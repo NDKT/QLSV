@@ -11,11 +11,11 @@ using QLSV;
 
 namespace QLSV.GUI.SinhVien
 {
-    public partial class fSua : Form
+    public partial class fSuaSV : Form
     {
         private BindingSource data = new BindingSource();
         private DTO.SinhVienDTO sv;
-        public fSua(DTO.SinhVienDTO sv)
+        public fSuaSV(DTO.SinhVienDTO sv)
         {
             this.sv = sv;
 

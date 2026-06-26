@@ -1,4 +1,5 @@
 ﻿using QLSV.BLL;
+using QLSV.DTO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,29 +10,26 @@ using System.Windows.Forms;
 
 namespace QLSV.GUI.Diem
 {
-    public partial class fSua : Form
+    public partial class fSuaDiem : Form
     {
-        private string maSV = string.Empty;
-        private string maMH = string.Empty;
-        public fSua(string maSV, string maMH)
+        private DiemDTO diem;
+        public fSuaDiem(DiemDTO diem)
         {
+            this.diem = diem;
             InitializeComponent();
-            this.maMH = maMH;
-            this.maSV = maSV;
             LayDiem();
         }
 
         private void LayDiem()
         {
-            DataTable data = BLL_Diem.Instance.TraDiem(maSV, maMH);
-            txbMaSV.Text = data.Rows[0].Field<string>("MaSV");
-            txbTenSV.Text = data.Rows[0].Field<string>("TenSv");
-            txbMaMH.Text = data.Rows[0].Field<string>("MaMH");
-            txbTenMH.Text = data.Rows[0].Field<string>("TenMH");
-            nmChuyenCan.Value = (decimal)data.Rows[0].Field<double>("ChuyenCan");
-            nmThuongXuyen.Value = (decimal)data.Rows[0].Field<double>("ThuongXuyen");
-            nmKetThuc.Value = (decimal)data.Rows[0].Field<double>("KetThuc");
-            txbTongKet.Text = data.Rows[0].Field<double>("TongKet").ToString("F4");
+            txbMaSV.Text = diem.MaSV;
+            txbTenSV.Text = diem.TenSV;
+            txbMaMH.Text = diem.MaMH;
+            txbTenMH.Text = diem.TenMH;
+            nmChuyenCan.Value = (decimal)diem.ChuyenCan;
+            nmThuongXuyen.Value = (decimal)diem.ThuongXuyen;
+            nmKetThuc.Value = (decimal)diem.KetThuc;
+            txbTongKet.Text = diem.TongKet.ToString("F4");
         }
 
 
@@ -42,12 +40,12 @@ namespace QLSV.GUI.Diem
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            string cc = nmChuyenCan.Value.ToString();
-            string tx = nmThuongXuyen.Value.ToString();
-            string kt = nmKetThuc.Value.ToString();
+            diem.ChuyenCan = (double)nmChuyenCan.Value;
+            diem.ThuongXuyen = (double)nmThuongXuyen.Value;
+            diem.KetThuc = (double)nmKetThuc.Value;
             try
             {
-               if (BLL_Diem.Instance.Sua(this.maSV, this.maMH, cc, tx, kt))
+               if (BLL_Diem.Instance.Sua(diem))
                 {
                     MessageBox.Show("Sửa thành công", "Thông báo");
                     this.Close();

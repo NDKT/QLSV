@@ -1,4 +1,5 @@
 ﻿using QLSV.BLL;
+using QLSV.DTO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,11 +10,11 @@ using System.Windows.Forms;
 
 namespace QLSV.GUI.Diem
 {
-    public partial class fThem : Form
+    public partial class fThemDiem : Form
     {
         private BindingSource dataMon = new BindingSource();
         private BindingSource dataSV = new BindingSource();
-        public fThem()
+        public fThemDiem()
         {
             InitializeComponent();
             DanhSachMon();
@@ -22,7 +23,7 @@ namespace QLSV.GUI.Diem
 
         private void btnThemMon_Click(object sender, EventArgs e)
         {
-            QLSV.GUI.MonHoc.fThem f = new QLSV.GUI.MonHoc.fThem();
+            QLSV.GUI.MonHoc.fThemMH f = new QLSV.GUI.MonHoc.fThemMH();
             f.ShowDialog();
             DanhSachMon();
         }
@@ -71,7 +72,7 @@ namespace QLSV.GUI.Diem
 
         private void btnThemSV_Click(object sender, EventArgs e)
         {
-            QLSV.GUI.SinhVien.fThem f = new SinhVien.fThem();
+            QLSV.GUI.SinhVien.fThemSV f = new SinhVien.fThemSV();
             f.ShowDialog();
             DanhSachSV();
         }
@@ -89,12 +90,18 @@ namespace QLSV.GUI.Diem
                 return;
             }
 
-            string cc = nmChuyenCan.Value.ToString();
-            string tx = nmThuongXuyen.Value.ToString();
-            string kt = nmKetThuc.Value.ToString();
+            DiemDTO diemSV = new DiemDTO()
+            {
+                ChuyenCan = (double)nmChuyenCan.Value,
+                ThuongXuyen = (double)nmThuongXuyen.Value,
+                KetThuc = (double)nmKetThuc.Value,
+                MaSV = cbbMaSV.Text,
+                MaMH = cbbMaMonHoc.Text
+            };
+
             try
             {
-                if (BLL_Diem.Instance.Them(cbbMaSV.Text, cbbMaMonHoc.Text, cc, tx, kt))
+                if (BLL_Diem.Instance.Them(diemSV))
                 {
                     MessageBox.Show("Thêm thành công", "Thông báo");
                     this.Close();

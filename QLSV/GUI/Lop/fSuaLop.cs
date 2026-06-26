@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace QLSV.GUI.Lop
 {
-    public partial class fSua : Form
+    public partial class fSuaLop : Form
     {
-        public fSua(string maLop, string tenLop)
+        public fSuaLop(string maLop, string tenLop)
         {
             InitializeComponent();
             txbMaLop.Text = maLop;

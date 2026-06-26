@@ -26,7 +26,7 @@ namespace QLSV
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            fThem f = new fThem();
+            fThemLop f = new fThemLop();
             f.ShowDialog();
             LoadData();
         }
@@ -52,7 +52,7 @@ namespace QLSV
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            fSua f = new fSua(maLop, tenLop);
+            fSuaLop f = new fSuaLop(maLop, tenLop);
             f.ShowDialog();
             LoadData();
             enableBtn(false);

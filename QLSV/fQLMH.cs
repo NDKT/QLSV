@@ -26,7 +26,7 @@ namespace QLSV
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            fThem f = new fThem();
+            fThemMH f = new fThemMH();
             f.ShowDialog();
             LoadData();
         }
@@ -38,7 +38,7 @@ namespace QLSV
             decimal soTin = Decimal.Parse(dataGridView1.CurrentRow?.Cells[2].Value?.ToString() ?? "0");
             decimal soTiet = Decimal.Parse(dataGridView1.CurrentRow?.Cells[4].Value?.ToString() ?? "0");
             string kieuThi = dataGridView1.CurrentRow?.Cells[3].Value?.ToString() ?? "";
-            fSua f = new fSua(maMH, tenMH, soTin, soTiet, kieuThi);
+            fSuaMH f = new fSuaMH(maMH, tenMH, soTin, soTiet, kieuThi);
             ToolHelper.DisableBtn(btnXoa, btnSua);
             f.ShowDialog();
             LoadData();

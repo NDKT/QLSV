@@ -13,8 +13,7 @@ namespace QLSV
 {
     public partial class fQLD : Form
     {
-        private string maSV = string.Empty;
-        private string maMH = string.Empty;
+        private DiemDTO diem = new DiemDTO();
         private BindingSource dataSV = new BindingSource();
         private BindingSource dataMH = new BindingSource();
         public fQLD()
@@ -31,8 +30,8 @@ namespace QLSV
         }
         private void LoadDiem()
         {
-            DataTable data = BLL_Diem.Instance.DanhSach();
-            dataGridView1.DataSource = data;
+            List<DiemDTO> ListD = BLL_Diem.Instance.DanhSach();
+            dataGridView1.DataSource = ListD;
         }
 
         private void LoadTimKiem()
@@ -67,7 +66,7 @@ namespace QLSV
         }
         private void btnThem_Click(object sender, EventArgs e)
         {
-            fThem f = new fThem();
+            fThemDiem f = new fThemDiem();
             f.ShowDialog();
             LoadDiem();
         }
@@ -79,7 +78,7 @@ namespace QLSV
             if (res == DialogResult.No) return;
             try
             {
-                if (BLL_Diem.Instance.Xoa(maSV, maMH))
+                if (BLL_Diem.Instance.Xoa(diem))
                 {
                     MessageBox.Show("Xoá Thành công", "Thông báo");
                     btnEnabled(false);
@@ -94,7 +93,7 @@ namespace QLSV
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            fSua f = new fSua(maSV, maMH);
+            fSuaDiem f = new fSuaDiem(diem);
             f.ShowDialog();
             btnEnabled(false);
             LoadDiem();
@@ -102,9 +101,11 @@ namespace QLSV
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0) return;
+            this.diem = (dataGridView1.Rows[e.RowIndex].DataBoundItem as DiemDTO)!;
+            if (this.diem == null) return;
             btnEnabled(true);
-            maSV = dataGridView1.CurrentRow?.Cells[0].Value?.ToString() ?? "";
-            maMH = dataGridView1.CurrentRow?.Cells[2].Value?.ToString() ?? "";
+            
         }
 
         private void btnReset_Click(object sender, EventArgs e)

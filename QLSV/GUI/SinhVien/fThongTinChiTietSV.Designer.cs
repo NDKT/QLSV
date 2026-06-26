@@ -1,6 +1,6 @@
 ﻿namespace QLSV.GUI.SinhVien
 {
-    partial class fThongTinChiTiet
+    partial class fThongTinChiTietSV
     {
         /// <summary>
         /// Required designer variable.

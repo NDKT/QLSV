@@ -1,6 +1,6 @@
 ﻿namespace QLSV.GUI.MonHoc
 {
-    partial class fThem
+    partial class fSuaMH
     {
         /// <summary>
         /// Required designer variable.
@@ -43,8 +43,8 @@
             panel6 = new Panel();
             nmSoTiet = new NumericUpDown();
             label4 = new Label();
-            btnThem = new Button();
-            btnQuaylai = new Button();
+            btnSua = new Button();
+            btnQuayLai = new Button();
             panel3.SuspendLayout();
             panel4.SuspendLayout();
             panel7.SuspendLayout();
@@ -61,17 +61,19 @@
             panel3.Location = new Point(13, 12);
             panel3.Margin = new Padding(4, 3, 4, 3);
             panel3.Name = "panel3";
-            panel3.Size = new Size(473, 41);
+            panel3.Size = new Size(456, 41);
             panel3.TabIndex = 2;
             // 
             // txbMaMH
             // 
-            txbMaMH.Location = new Point(139, 6);
+            txbMaMH.Location = new Point(151, 6);
             txbMaMH.Margin = new Padding(4, 3, 4, 3);
             txbMaMH.MaxLength = 255;
             txbMaMH.Name = "txbMaMH";
-            txbMaMH.Size = new Size(330, 30);
+            txbMaMH.ReadOnly = true;
+            txbMaMH.Size = new Size(301, 30);
             txbMaMH.TabIndex = 1;
+            txbMaMH.TabStop = false;
             // 
             // label1
             // 
@@ -87,17 +89,17 @@
             // 
             panel4.Controls.Add(txbTenMH);
             panel4.Controls.Add(label2);
-            panel4.Location = new Point(13, 59);
+            panel4.Location = new Point(13, 62);
             panel4.Name = "panel4";
-            panel4.Size = new Size(473, 37);
+            panel4.Size = new Size(457, 37);
             panel4.TabIndex = 3;
             // 
             // txbTenMH
             // 
-            txbTenMH.Location = new Point(139, 5);
+            txbTenMH.Location = new Point(152, 5);
             txbTenMH.MaxLength = 255;
             txbTenMH.Name = "txbTenMH";
-            txbTenMH.Size = new Size(330, 30);
+            txbTenMH.Size = new Size(301, 30);
             txbTenMH.TabIndex = 2;
             // 
             // label2
@@ -113,19 +115,18 @@
             // 
             panel7.Controls.Add(cbKieuThi);
             panel7.Controls.Add(label5);
-            panel7.Location = new Point(12, 102);
+            panel7.Location = new Point(13, 102);
             panel7.Name = "panel7";
-            panel7.Size = new Size(474, 37);
+            panel7.Size = new Size(457, 37);
             panel7.TabIndex = 4;
             // 
             // cbKieuThi
             // 
-            cbKieuThi.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cbKieuThi.FormattingEnabled = true;
             cbKieuThi.Items.AddRange(new object[] { "Viết", "Vấn đáp", "Trực tuyến", "Báo cáo" });
-            cbKieuThi.Location = new Point(140, 4);
+            cbKieuThi.Location = new Point(152, 1);
             cbKieuThi.Name = "cbKieuThi";
-            cbKieuThi.Size = new Size(330, 30);
+            cbKieuThi.Size = new Size(300, 30);
             cbKieuThi.TabIndex = 4;
             // 
             // label5
@@ -167,7 +168,7 @@
             // 
             panel6.Controls.Add(nmSoTiet);
             panel6.Controls.Add(label4);
-            panel6.Location = new Point(289, 145);
+            panel6.Location = new Point(272, 145);
             panel6.Name = "panel6";
             panel6.Size = new Size(197, 37);
             panel6.TabIndex = 5;
@@ -189,36 +190,36 @@
             label4.TabIndex = 0;
             label4.Text = "Số tiết";
             // 
-            // btnThem
+            // btnSua
             // 
-            btnThem.Enabled = false;
-            btnThem.Location = new Point(289, 203);
-            btnThem.Name = "btnThem";
-            btnThem.Size = new Size(94, 29);
-            btnThem.TabIndex = 6;
-            btnThem.Text = "Thêm";
-            btnThem.UseVisualStyleBackColor = true;
-            btnThem.Click += btnThem_Click;
+            btnSua.Enabled = false;
+            btnSua.Location = new Point(272, 201);
+            btnSua.Name = "btnSua";
+            btnSua.Size = new Size(94, 29);
+            btnSua.TabIndex = 8;
+            btnSua.Text = "Sửa";
+            btnSua.UseVisualStyleBackColor = true;
+            btnSua.Click += btnSua_Click;
             // 
-            // btnQuaylai
+            // btnQuayLai
             // 
-            btnQuaylai.Location = new Point(392, 203);
-            btnQuaylai.Name = "btnQuaylai";
-            btnQuaylai.Size = new Size(94, 29);
-            btnQuaylai.TabIndex = 7;
-            btnQuaylai.Text = "Quay lại";
-            btnQuaylai.UseVisualStyleBackColor = true;
-            btnQuaylai.Click += btnQuaylai_Click;
+            btnQuayLai.Location = new Point(376, 201);
+            btnQuayLai.Name = "btnQuayLai";
+            btnQuayLai.Size = new Size(94, 29);
+            btnQuayLai.TabIndex = 8;
+            btnQuayLai.Text = "Quay lại";
+            btnQuayLai.UseVisualStyleBackColor = true;
+            btnQuayLai.Click += btnQuayLai_Click;
             // 
-            // fThem
+            // fSua
             // 
-            AcceptButton = btnThem;
+            AcceptButton = btnSua;
             AutoScaleDimensions = new SizeF(11F, 22F);
             AutoScaleMode = AutoScaleMode.Font;
-            CancelButton = btnQuaylai;
-            ClientSize = new Size(505, 266);
-            Controls.Add(btnQuaylai);
-            Controls.Add(btnThem);
+            CancelButton = btnQuayLai;
+            ClientSize = new Size(484, 252);
+            Controls.Add(btnQuayLai);
+            Controls.Add(btnSua);
             Controls.Add(panel6);
             Controls.Add(panel5);
             Controls.Add(panel7);
@@ -226,9 +227,9 @@
             Controls.Add(panel3);
             Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(4, 3, 4, 3);
-            Name = "fThem";
+            Name = "fSua";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Thêm môn học";
+            Text = "Sửa thông tin môn học";
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             panel4.ResumeLayout(false);
@@ -261,7 +262,7 @@
         private Panel panel6;
         private NumericUpDown nmSoTiet;
         private Label label4;
-        private Button btnThem;
-        private Button btnQuaylai;
+        private Button btnSua;
+        private Button btnQuayLai;
     }
 }

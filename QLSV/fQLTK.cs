@@ -21,7 +21,7 @@ namespace QLSV
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            fThem f = new fThem();
+            fThemTK f = new fThemTK();
             f.ShowDialog();
             LoadData();
         }
@@ -31,7 +31,7 @@ namespace QLSV
             string id = dataGridView1.CurrentRow?.Cells[0].Value?.ToString() ?? "";
             string ten = dataGridView1.CurrentRow?.Cells[1].Value?.ToString() ?? "";
             ToolHelper.DisableBtn(btnSua, btnXoa);
-            fSua f = new fSua(id, ten);
+            fSuaTK f = new fSuaTK(id, ten);
             f.ShowDialog();
             LoadData();
         }

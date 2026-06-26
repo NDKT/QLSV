@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace QLSV.GUI.SinhVien
 {
-    public partial class fThongTinChiTiet : Form
+    public partial class fThongTinChiTietSV : Form
     {
-        public fThongTinChiTiet(SinhVienDTO sv)
+        public fThongTinChiTietSV(SinhVienDTO sv)
         {
             InitializeComponent();
             LoadSV(sv);

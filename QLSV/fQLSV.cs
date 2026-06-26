@@ -85,7 +85,7 @@ namespace QLSV
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            fThem f = new fThem();
+            fThemSV f = new fThemSV();
             f.ShowDialog();
             LoadSV();
         }
@@ -108,7 +108,7 @@ namespace QLSV
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            fSua f = new fSua(sv);
+            fSuaSV f = new fSuaSV(sv);
             btnChiTiet.Enabled = false;
             btnSua.Enabled = false;
             btnXoa.Enabled = false;
@@ -152,7 +152,7 @@ namespace QLSV
 
         private void btnChiTiet_Click(object sender, EventArgs e)
         {
-            fThongTinChiTiet f = new fThongTinChiTiet(sv);
+            fThongTinChiTietSV f = new fThongTinChiTietSV(sv);
             f.ShowDialog();
         }
     }

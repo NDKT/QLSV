@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace QLSV.GUI.MonHoc
 {
-    public partial class fThem : Form
+    public partial class fThemMH : Form
     {
-        public fThem()
+        public fThemMH()
         {
             InitializeComponent();
             cbKieuThi.SelectedIndex = 0;

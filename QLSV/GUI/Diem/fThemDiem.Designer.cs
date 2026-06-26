@@ -1,6 +1,6 @@
 ﻿namespace QLSV.GUI.Diem
 {
-    partial class fThem
+    partial class fThemDiem
     {
         /// <summary>
         /// Required designer variable.

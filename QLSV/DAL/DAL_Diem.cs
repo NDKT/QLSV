@@ -1,11 +1,13 @@
-﻿using System;
+﻿using QLSV.DAL.Interfaces;
+using QLSV.DTO;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
 
 namespace QLSV.DAL
 {
-    public class DAL_Diem
+    public class DAL_Diem : IDiem
     {
         private static DAL_Diem? instance = null;
 
@@ -20,35 +22,55 @@ namespace QLSV.DAL
         }
         private DAL_Diem() { }
 
-        public bool Them(string maSV, string maMH, double cc, double tx, double kt)
+        public bool Them(DiemDTO diem)
         {
             string query = "insert into Diem (MaSV, MaMH, ChuyenCan, ThuongXuyen, KetThuc) values ( @masv , @mamh , @cc , @tx , @kt )";
-            return DAL.Instance.excuteNonQuery(query, maSV, maMH, cc, tx, kt);
+            return DAL.Instance.excuteNonQuery(query, diem.MaSV, diem.MaMH, diem.ChuyenCan, diem.ThuongXuyen, diem.KetThuc);
         }
 
-        public DataTable DanhSach()
+        private List<DiemDTO> ConvertToList(DataTable dt)
+        {
+            List<DiemDTO> listD = new List<DiemDTO>();
+            foreach(DataRow row in dt.Rows)
+            {
+                listD.Add(new DiemDTO()
+                {
+                    ChuyenCan = row.Field<double>("ChuyenCan"),
+                    KetThuc = row.Field<double>("KetThuc"),
+                    ThuongXuyen = row.Field<double>("ThuongXuyen"),
+                    MaMH = row.Field<string>("MaMH")!,
+                    MaSV = row.Field<string>("MaSV")!,
+                    TongKet = row.Field<double>("TongKet"),
+                    TenMH = row.Field<string>("TenMH")!,
+                    TenSV = row.Field<string>("TenSV")!
+                });
+            }
+            return listD;
+        }
+
+        public List<DiemDTO> DanhSach()
         {
             string query = "Select sv.MaSV, sv.TenSV, d.MaMH, m.TenMH, d.ChuyenCan, d.ThuongXuyen, d.KetThuc, d.TongKet  from Diem d join SinhVien sv on d.MaSV = sv.MaSV join MonHoc m on d.MaMH = m.MaMH";
-            return DAL.Instance.excuteQuery(query);
+            return ConvertToList(DAL.Instance.excuteQuery(query));
         }
 
-        public DataTable TraDiem(string maSV, string maMH)
+        public List<DiemDTO> TraDiem(string maSV, string maMH)
         {
             string query = "Select sv.MaSV, sv.TenSV, d.MaMH, m.TenMH, d.ChuyenCan, d.ThuongXuyen, d.KetThuc, d.TongKet  from Diem d join SinhVien sv on d.MaSV = sv.MaSV join MonHoc m on d.MaMH = m.MaMH where d.MaSV = @masv and d.MaMH = @mamh";
             if (string.IsNullOrWhiteSpace(maMH)) query = "Select sv.MaSV, sv.TenSV, d.MaMH, m.TenMH, d.ChuyenCan, d.ThuongXuyen, d.KetThuc, d.TongKet  from Diem d join SinhVien sv on d.MaSV = sv.MaSV join MonHoc m on d.MaMH = m.MaMH where d.MaSV = @masv";
-            return DAL.Instance.excuteQuery(query, maSV, maMH);
+            return ConvertToList(DAL.Instance.excuteQuery(query, maSV, maMH));
         }
 
-        public bool Sua(string maSV, string maMH, double cc, double tx, double kt)
+        public bool Sua(DiemDTO diem)
         {
             string query = "update Diem set ChuyenCan = @cc , ThuongXuyen = @tx , KetThuc = @kt where MaSV = @masv and MaMH = @mamh";
-            return DAL.Instance.excuteNonQuery(query, cc, tx, kt, maSV, maMH);
+            return DAL.Instance.excuteNonQuery(query, diem.ChuyenCan, diem.ThuongXuyen, diem.KetThuc, diem.MaSV, diem.MaMH);
         }
 
-        public bool Xoa(string maSV, string maMH)
+        public bool Xoa(DiemDTO diem)
         {
             string query = "delete from Diem where MaSV = @msv and MaMH = @mmh";
-            return DAL.Instance.excuteNonQuery(query, maSV, maMH);
+            return DAL.Instance.excuteNonQuery(query, diem.MaSV, diem.MaMH);
         }
     }
 }

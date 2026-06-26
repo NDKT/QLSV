@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace QLSV.GUI.TaiKhoan
 {
-    public partial class fThem : Form
+    public partial class fThemTK : Form
     {
-        public fThem()
+        public fThemTK()
         {
             InitializeComponent();
         }

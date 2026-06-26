@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace QLSV.GUI.Lop
 {
-    public partial class fThem : Form
+    public partial class fThemLop : Form
     {
-        public fThem()
+        public fThemLop()
         {
             InitializeComponent();
         }
