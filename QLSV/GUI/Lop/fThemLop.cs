@@ -1,4 +1,5 @@
 ﻿using QLSV.BLL;
+using QLSV.DTO;
 using QLSV.Helper;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,13 @@ namespace QLSV.GUI.Lop
         {
             try
             {
-                if (BLL_Lop.Instance.Them(txbMaLop.Text, txbTenLop.Text))
+                LopDTO lop = new LopDTO()
+                {
+                    MaLop = txbMaLop.Text,
+                    TenLop = txbTenLop.Text
+                };
+              
+                if (BLL_Lop.Instance.Them(lop))
                 {
                     MessageBox.Show("Thêm lớp thành công", "Thông báo");
                     this.Close();

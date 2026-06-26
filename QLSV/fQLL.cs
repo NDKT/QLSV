@@ -1,4 +1,5 @@
 ﻿using QLSV.BLL;
+using QLSV.DTO;
 using QLSV.GUI.Lop;
 using QLSV.Helper;
 using System;
@@ -13,8 +14,7 @@ namespace QLSV
 {
     public partial class fQLL : Form
     {
-        private string tenLop = string.Empty;
-        private string maLop = string.Empty;
+        private LopDTO lop = new LopDTO();
 
 
         public fQLL()
@@ -38,13 +38,15 @@ namespace QLSV
         }
         private void LoadData()
         {
-            FormHelper.ThemDuLieu(BLL_Lop.Instance.DanhSach(), dataGridView1);
+            //FormHelper.ThemDuLieu(BLL_Lop.Instance.DanhSach(), dataGridView1);
+            dataGridView1.DataSource = BLL_Lop.Instance.DanhSach();
+            dataGridView1.ClearSelection();
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            this.maLop = dataGridView1.CurrentRow?.Cells[0].Value?.ToString() ?? "";
-            this.tenLop = dataGridView1.CurrentRow?.Cells[1].Value?.ToString() ?? "";
+            if (e.RowIndex < 0) return;
+            lop = (dataGridView1.Rows[e.RowIndex].DataBoundItem as LopDTO)!;
             enableBtn(true);
         }
 
@@ -52,7 +54,7 @@ namespace QLSV
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            fSuaLop f = new fSuaLop(maLop, tenLop);
+            fSuaLop f = new fSuaLop(lop);
             f.ShowDialog();
             LoadData();
             enableBtn(false);
@@ -64,7 +66,7 @@ namespace QLSV
             if (DialogResult.No == res) return;
             try
             {
-                BLL_Lop.Instance.Xoa(maLop);
+                BLL_Lop.Instance.Xoa(lop.MaLop);
                 ToolHelper.DisableBtn(btnSua, btnXoa);
                 MessageBox.Show("Xoá thành công", "Thông báo");
                 LoadData();

@@ -1,4 +1,6 @@
 ﻿using QLSV.DAL;
+using QLSV.DAL.Interfaces;
+using QLSV.DTO;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,7 +11,7 @@ namespace QLSV.BLL
     public class BLL_Lop
     {
         private static BLL_Lop? instance = null;
-
+        private ILop lopDAL = DAL_Lop.Instance;
         public static BLL_Lop Instance
         {
             get
@@ -21,12 +23,12 @@ namespace QLSV.BLL
         }
         private BLL_Lop() { }
 
-        public bool Them(string maLop, string tenLop)
+        public bool Them(LopDTO lop)
         {
-            if (string.IsNullOrWhiteSpace(maLop) || string.IsNullOrWhiteSpace(tenLop)) throw new Exception("Tên lớp và mã lớp không được trống!");
+            if (string.IsNullOrWhiteSpace(lop.MaLop) || string.IsNullOrWhiteSpace(lop.TenLop)) throw new Exception("Tên lớp và mã lớp không được trống!");
             try
             {
-                return DAL_Lop.Instance.Them(maLop.Trim(), tenLop.Trim());
+                return lopDAL.Them(lop);
             }
             catch
             {
@@ -34,12 +36,12 @@ namespace QLSV.BLL
             }
         }
 
-        public bool Sua(string tenLop, string maLop)
+        public bool Sua(LopDTO lop)
         {
-            if (string.IsNullOrWhiteSpace(tenLop)) throw new Exception("Tên lớp không được là khoảng trắng");
+            if (string.IsNullOrWhiteSpace(lop.TenLop)) throw new Exception("Tên lớp không được là khoảng trắng");
             try
             {
-                return DAL_Lop.Instance.Sua(maLop.Trim(), tenLop.Trim());
+                return lopDAL.Sua(lop);
             }
             catch
             {
@@ -51,7 +53,7 @@ namespace QLSV.BLL
         {
             try
             {
-                bool res = DAL_Lop.Instance.Xoa(maLop);
+                bool res = lopDAL.Xoa(maLop);
                 if (res) return res;
                 throw new Exception("Có lỗi xảy ra, không thể xoá");
             }
@@ -61,18 +63,18 @@ namespace QLSV.BLL
             }
         }
 
-        public DataTable DanhSach()
+        public List<LopDTO> DanhSach()
         {
-            return DAL_Lop.Instance.DanhSach();
+            return lopDAL.DanhSach();
         }
 
-        public DataTable TimKiem(string maLop, string tenLop)
+        public List<LopDTO> TimKiem(string maLop, string tenLop)
         {
             if (string.IsNullOrWhiteSpace(maLop) && string.IsNullOrWhiteSpace(tenLop))
             {
-                return DAL_Lop.Instance.DanhSach();
+                return lopDAL.DanhSach();
             }
-            return DAL_Lop.Instance.TimKiem(maLop.Trim(), tenLop.Trim());
+            return lopDAL.TimKiem(maLop.Trim(), tenLop.Trim());
         }
     }
 }

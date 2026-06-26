@@ -23,11 +23,11 @@ namespace QLSV.GUI.SinhVien
             List<SinhVienDTO> listSV = BLL_SinhVien.Instance.TimKiem(sv.MaSV, sv.TenSV);
             SinhVienDTO SV = listSV[0];
             string maLop = SV.MaLop;
-            DataTable dataLop = BLL_Lop.Instance.TimKiem(maLop,"");
+            LopDTO dataLop = BLL_Lop.Instance.TimKiem(maLop,"")[0];
             txbMaSV.Text = SV.MaSV;
             txbTenSV.Text =SV.TenSV;
             txbGioiTinh.Text = SV.GioiTinh;
-            txbLop.Text = dataLop.Rows[0].Field<string>("TenLop");
+            txbLop.Text = dataLop.TenLop;
             txbNgaySinh.Text = SV.NgaySinh.ToString("dd/MM/yyyy");
             txbNgayNhapHoc.Text = SV.NgayNhapHoc.ToString("dd/MM/yyyy");
 

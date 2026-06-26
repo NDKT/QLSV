@@ -1,4 +1,5 @@
 ﻿using QLSV.BLL;
+using QLSV.DTO;
 using QLSV.Helper;
 using System;
 using System.Collections.Generic;
@@ -12,11 +13,13 @@ namespace QLSV.GUI.Lop
 {
     public partial class fSuaLop : Form
     {
-        public fSuaLop(string maLop, string tenLop)
+        private LopDTO lop;
+        public fSuaLop(LopDTO lop)
         {
+            this.lop = lop;
             InitializeComponent();
-            txbMaLop.Text = maLop;
-            txbTenLop.Text = tenLop;
+            txbMaLop.Text = lop.MaLop;
+            txbTenLop.Text = lop.TenLop;
         }
 
         private void btnQuayLai_Click(object sender, EventArgs e)
@@ -26,11 +29,11 @@ namespace QLSV.GUI.Lop
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            string maLop = txbMaLop.Text;
-            string tenLop = txbTenLop.Text;
+            lop.MaLop = txbMaLop.Text;
+            lop.TenLop = txbTenLop.Text;
             try
             {
-                if(BLL_Lop.Instance.Sua(tenLop, maLop))
+                if(BLL_Lop.Instance.Sua(lop))
                 {
                     MessageBox.Show("Cập nhật thành công", "Thông báo");
                     this.Close();
