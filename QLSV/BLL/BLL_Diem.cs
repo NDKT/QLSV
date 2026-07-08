@@ -43,7 +43,7 @@ namespace QLSV.BLL
 
         public List<DiemDTO> TraDiem(string maSV, string maMH)
         {
-            if ((string.IsNullOrWhiteSpace(maSV) && string.IsNullOrWhiteSpace(maMH)) || string.IsNullOrEmpty(maSV)) return DanhSach();
+            if ((string.IsNullOrWhiteSpace(maSV) && string.IsNullOrWhiteSpace(maMH))) return DanhSach();
             return diemDAL.TraDiem(maSV, maMH);
         }
 

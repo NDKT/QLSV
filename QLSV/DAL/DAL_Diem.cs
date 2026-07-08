@@ -56,9 +56,23 @@ namespace QLSV.DAL
 
         public List<DiemDTO> TraDiem(string maSV, string maMH)
         {
-            string query = "Select sv.MaSV, sv.TenSV, d.MaMH, m.TenMH, d.ChuyenCan, d.ThuongXuyen, d.KetThuc, d.TongKet  from Diem d join SinhVien sv on d.MaSV = sv.MaSV join MonHoc m on d.MaMH = m.MaMH where d.MaSV = @masv and d.MaMH = @mamh";
-            if (string.IsNullOrWhiteSpace(maMH)) query = "Select sv.MaSV, sv.TenSV, d.MaMH, m.TenMH, d.ChuyenCan, d.ThuongXuyen, d.KetThuc, d.TongKet  from Diem d join SinhVien sv on d.MaSV = sv.MaSV join MonHoc m on d.MaMH = m.MaMH where d.MaSV = @masv";
-            return ConvertToList(DAL.Instance.excuteQuery(query, maSV, maMH));
+            string query;
+            if (!string.IsNullOrWhiteSpace(maMH) && !string.IsNullOrWhiteSpace(maSV))
+            {
+                query = "Select sv.MaSV, sv.TenSV, d.MaMH, m.TenMH, d.ChuyenCan, d.ThuongXuyen, d.KetThuc, d.TongKet  from Diem d join SinhVien sv on d.MaSV = sv.MaSV join MonHoc m on d.MaMH = m.MaMH where d.MaSV = @masv and d.MaMH = @mamh";
+                return ConvertToList(DAL.Instance.excuteQuery(query, maSV, maMH));
+            }
+
+            else if (!string.IsNullOrWhiteSpace(maMH))
+            {
+                query = "Select sv.MaSV, sv.TenSV, d.MaMH, m.TenMH, d.ChuyenCan, d.ThuongXuyen, d.KetThuc, d.TongKet  from Diem d join SinhVien sv on d.MaSV = sv.MaSV join MonHoc m on d.MaMH = m.MaMH where d.MaMH = @mamh";
+                return ConvertToList(DAL.Instance.excuteQuery(query, maMH));
+            }
+            else 
+            {
+                query = "Select sv.MaSV, sv.TenSV, d.MaMH, m.TenMH, d.ChuyenCan, d.ThuongXuyen, d.KetThuc, d.TongKet  from Diem d join SinhVien sv on d.MaSV = sv.MaSV join MonHoc m on d.MaMH = m.MaMH where d.MaSV = @masv";
+                return ConvertToList(DAL.Instance.excuteQuery(query, maSV));
+            }
         }
 
         public bool Sua(DiemDTO diem)

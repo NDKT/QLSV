@@ -122,7 +122,7 @@
             // 
             cbKieuThi.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cbKieuThi.FormattingEnabled = true;
-            cbKieuThi.Items.AddRange(new object[] { "Viết", "Vấn đáp", "Trực tuyến", "Báo cáo" });
+            cbKieuThi.Items.AddRange(new object[] { "Viết", "Vấn đáp", "Trực tuyến", "Báo cáo", "Lý thuyết", "Thực hành" });
             cbKieuThi.Location = new Point(140, 4);
             cbKieuThi.Name = "cbKieuThi";
             cbKieuThi.Size = new Size(330, 30);
@@ -210,7 +210,7 @@
             btnQuaylai.UseVisualStyleBackColor = true;
             btnQuaylai.Click += btnQuaylai_Click;
             // 
-            // fThem
+            // fThemMH
             // 
             AcceptButton = btnThem;
             AutoScaleDimensions = new SizeF(11F, 22F);
@@ -226,7 +226,7 @@
             Controls.Add(panel3);
             Font = new Font("Times New Roman", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(4, 3, 4, 3);
-            Name = "fThem";
+            Name = "fThemMH";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Thêm môn học";
             panel3.ResumeLayout(false);
